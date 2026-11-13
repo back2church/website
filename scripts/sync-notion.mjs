@@ -22,20 +22,22 @@ if (!TOKEN) {
   process.exit(0);
 }
 
-const PUBLIC_FILTER = {
+// Builds an "equals" filter that matches the property's real type (select, status, …).
+function eq(schema, name, value) {
+  const type = schema[name]?.type;
+  if (!type) throw new Error(`Property "${name}" not found in the Notion database.`);
+  if (type === 'multi_select') return { property: name, multi_select: { contains: value } };
+  return { property: name, [type]: { equals: value } };
+}
+
+// Notion allows only two levels of nested filters, so Teaching/Sermon get one AND each.
+const publicFilter = schema => ({
   or: [
-    { property: 'Entry type', select: { equals: 'Ressources' } },
-    {
-      and: [
-        { or: [
-          { property: 'Entry type', select: { equals: 'Teaching' } },
-          { property: 'Entry type', select: { equals: 'Sermon' } },
-        ] },
-        { property: 'Document status', select: { equals: '1 Final' } },
-      ],
-    },
+    eq(schema, 'Entry type', 'Ressources'),
+    { and: [eq(schema, 'Entry type', 'Teaching'), eq(schema, 'Document status', '1 Final')] },
+    { and: [eq(schema, 'Entry type', 'Sermon'), eq(schema, 'Document status', '1 Final')] },
   ],
-};
+});
 
 // Properties that may be published. Everything else (Email, Mobile, Address, Birthdate, …) is dropped.
 const SAFE_PROPS = ['Entry type', 'Language', 'Series', 'Lesson type', 'Media type', 'Ministry', 'Level', 'Tags', 'URL'];
@@ -163,6 +165,7 @@ function propValue(p) {
   if (!p) return null;
   switch (p.type) {
     case 'select': return p.select?.name ?? null;
+    case 'status': return p.status?.name ?? null;
     case 'multi_select': return p.multi_select.map(o => o.name);
     case 'url': return safeUrl(p.url);
     case 'rich_text': return plain(p.rich_text) || null;
@@ -177,11 +180,14 @@ async function main() {
   await mkdir(path.join(OUT_DIR, 'media'), { recursive: true });
   await mkdir(path.join(OUT_DIR, 'data'), { recursive: true });
 
+  const db = await notion('GET', `/databases/${DATABASE_ID}`);
+  const filter = publicFilter(db.properties);
+
   const pages = [];
   let cursor;
   do {
     const r = await notion('POST', `/databases/${DATABASE_ID}/query`, {
-      filter: PUBLIC_FILTER, page_size: 100, ...(cursor ? { start_cursor: cursor } : {}),
+      filter, page_size: 100, ...(cursor ? { start_cursor: cursor } : {}),
     });
     pages.push(...r.results);
     cursor = r.has_more ? r.next_cursor : null;
