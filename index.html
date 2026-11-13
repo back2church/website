@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>back2church – Kirche bauen, wie JESUS es will</title>
+<meta name="description" content="back2church – Building Church CHRIST's way. Good News &amp; Truth App and the back2church Wiki.">
+<meta property="og:title" content="back2church">
+<meta property="og:description" content="Kirchen bauen wie es JESUS will · Building Churches CHRIST's Way">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0b0a; --surface:#161613; --surface-2:#1f1e1a; --line:#2e2c25;
+  --text:#f4f2ea; --muted:#a9a596; --accent:#fff48d; --accent-ink:#1a1900;
+  --radius:14px; --max:1080px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.6 "DM Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+img{max-width:100%;height:auto}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+[hidden]{display:none!important}
+
+/* header */
+header{position:sticky;top:0;z-index:20;background:rgba(11,11,10,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:16px;height:64px}
+.brand{font-weight:700;font-size:20px;letter-spacing:-.01em;color:var(--text);text-decoration:none}
+.brand b{color:var(--accent)}
+nav{margin-left:auto;display:flex;gap:4px;align-items:center}
+nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:999px;font-size:15px}
+nav a:hover{color:var(--text);background:var(--surface)}
+.lang{border:1px solid var(--line);background:none;color:var(--text);border-radius:999px;padding:6px 12px;font:500 13px "DM Sans";cursor:pointer;margin-left:6px}
+.lang:hover{border-color:var(--accent)}
+
+/* hero */
+.hero{padding:96px 0 72px;border-bottom:1px solid var(--line)}
+.eyebrow{color:var(--accent);font-weight:500;letter-spacing:.12em;text-transform:uppercase;font-size:13px;margin:0 0 18px}
+.hero h1{font:400 clamp(36px,6vw,68px)/1.08 "DM Serif Display",serif;margin:0 0 28px;max-width:16ch;letter-spacing:-.01em}
+.hero h1 em{color:var(--accent);font-style:normal}
+.verse{border-left:3px solid var(--accent);padding:4px 0 4px 18px;max-width:62ch;color:var(--muted);margin:0}
+.verse cite{display:block;margin-top:6px;font-style:normal;font-size:14px;color:var(--text)}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:700;font-size:15px;text-decoration:none;border:1px solid var(--accent);cursor:pointer;font-family:inherit}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:none;color:var(--accent)}
+.btn:hover{filter:brightness(1.06)}
+
+section.block{scroll-margin-top:64px;padding:80px 0;border-bottom:1px solid var(--line)}
+h2.sec{font:400 clamp(28px,4vw,42px)/1.15 "DM Serif Display",serif;margin:0 0 12px}
+.lead{color:var(--muted);max-width:60ch;margin:0 0 32px}
+
+/* app */
+.app{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.app ul{padding:0;margin:0 0 28px;list-style:none}
+.app li{padding:10px 0 10px 30px;position:relative;border-bottom:1px solid var(--line)}
+.app li:before{content:"✦";position:absolute;left:0;color:var(--accent)}
+.phone{aspect-ratio:9/16;max-height:520px;margin:0 auto;border:1px solid var(--line);border-radius:32px;background:linear-gradient(160deg,#24231d,#0f0f0d);display:flex;flex-direction:column;justify-content:flex-end;padding:28px;box-shadow:0 30px 80px -30px rgba(255,244,141,.18)}
+.phone .t{font:400 30px/1.1 "DM Serif Display",serif}
+.phone .s{color:var(--muted);font-size:14px;margin-top:8px}
+
+/* wiki */
+.search{position:relative;max-width:720px}
+.search input{width:100%;padding:18px 20px 18px 52px;font:400 18px "DM Sans";color:var(--text);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);outline:none}
+.search input:focus{border-color:var(--accent)}
+.search svg{position:absolute;left:18px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 8px}
+.chip{border:1px solid var(--line);background:none;color:var(--muted);padding:6px 12px;border-radius:999px;font:500 13px "DM Sans";cursor:pointer}
+.chip[aria-pressed=true]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.meta{color:var(--muted);font-size:14px;margin:10px 0 18px;min-height:1.6em}
+.results{list-style:none;padding:0;margin:0;max-width:720px}
+.results li button{all:unset;box-sizing:border-box;display:block;width:100%;cursor:pointer;padding:16px 18px;border:1px solid var(--line);background:var(--surface);border-radius:var(--radius);margin-bottom:10px}
+.results li button:hover,.results li button:focus-visible{border-color:var(--accent);background:var(--surface-2)}
+.r-title{font-weight:700;font-size:17px}
+.r-sub{color:var(--muted);font-size:14px;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.r-sub mark,.entry mark{background:rgba(255,244,141,.25);color:inherit;border-radius:3px}
+.pill{display:inline-block;font-size:12px;padding:2px 9px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);color:var(--muted);margin:6px 6px 0 0}
+.pill.type{color:var(--accent);border-color:rgba(255,244,141,.35)}
+.empty{color:var(--muted);padding:24px 0}
+
+/* entry view */
+.entry{max-width:760px}
+.back{all:unset;cursor:pointer;color:var(--muted);font-size:15px;display:inline-flex;gap:6px;margin-bottom:24px}
+.back:hover{color:var(--accent)}
+.entry h2{font:400 clamp(30px,4.5vw,46px)/1.12 "DM Serif Display",serif;margin:0 0 12px}
+.entry .body{margin-top:28px}
+.entry .body h2,.entry .body h3,.entry .body h4{font-family:"DM Serif Display",serif;font-weight:400;margin:1.6em 0 .4em}
+.entry .body h3{font-size:26px}.entry .body h4{font-size:21px}
+.entry .body blockquote{border-left:3px solid var(--accent);margin:1em 0;padding:2px 0 2px 18px;color:var(--muted)}
+.entry .body .callout{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;margin:1em 0}
+.entry .body details{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;margin:.8em 0}
+.entry .body summary{cursor:pointer;font-weight:500}
+.entry .body table{border-collapse:collapse;width:100%;font-size:15px;display:block;overflow-x:auto}
+.entry .body td,.entry .body th{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.entry .body pre{background:var(--surface);padding:14px;border-radius:10px;overflow-x:auto}
+.entry .body figure{margin:1.2em 0}.entry .body figcaption{color:var(--muted);font-size:14px}
+.entry .body hr{border:0;border-top:1px solid var(--line);margin:2em 0}
+
+footer{padding:40px 0 60px;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between}
+
+@media (max-width:760px){
+  .app{grid-template-columns:1fr}
+  .phone{display:none}
+  nav a.hide-sm{display:none}
+  .hero{padding:64px 0 52px}
+  section.block{padding:60px 0}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#top">back<b>2</b>church</a>
+    <nav>
+      <a href="#app" class="hide-sm" data-i18n="navApp">App</a>
+      <a href="#wiki" data-i18n="navWiki">Wiki</a>
+      <button class="lang" id="langBtn" type="button" aria-label="Sprache / Language">EN</button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="eyebrow">Kirche bauen, wie JESUS es will</p>
+      <h1 data-i18n-html="heroTitle">Gehst du immer noch in die Kirche – oder bist du bereit, <em>die Kirche zu werden?</em></h1>
+      <blockquote class="verse">
+        “And He gave some as apostles, and some as prophets, and some as evangelists, and some as pastors and teachers, for the equipping of the saints for the work of service, to the building up of the body of Christ.”
+        <cite>Ephesians 4:11–12 (NASB 1995)</cite>
+      </blockquote>
+      <div class="cta">
+        <a class="btn primary" href="https://gospel.back2church.org" target="_blank" rel="noopener" data-i18n="ctaApp">App öffnen</a>
+        <a class="btn ghost" href="#wiki" data-i18n="ctaWiki">Wiki durchsuchen</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="app">
+    <div class="wrap app">
+      <div>
+        <p class="eyebrow">App</p>
+        <h2 class="sec">Good News &amp; Truth</h2>
+        <p class="lead" data-i18n="appLead">Entdecke die Gute Nachricht, durchdachte Antworten auf Glaubensfragen und Ressourcen in mehreren Sprachen – kostenlos, direkt im Browser.</p>
+        <ul>
+          <li data-i18n="appF1">Das Evangelium klar und biblisch erklärt</li>
+          <li data-i18n="appF2">Antworten auf häufige Glaubensfragen</li>
+          <li data-i18n="appF3">Mehrsprachig – ideal zum Weitergeben</li>
+        </ul>
+        <div class="cta" style="margin-top:0">
+          <a class="btn primary" href="https://gospel.back2church.org" target="_blank" rel="noopener" data-i18n="ctaApp">App öffnen</a>
+          <a class="btn ghost" href="https://github.com/back2church/gospel-truth-app" target="_blank" rel="noopener" data-i18n="ctaSource">Quellcode auf GitHub</a>
+        </div>
+      </div>
+      <div class="phone" aria-hidden="true">
+        <div class="t">Good News<br>&amp; Truth</div>
+        <div class="s">gospel.back2church.org</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="wiki">
+    <div class="wrap">
+      <div id="wikiSearch">
+        <p class="eyebrow">Wiki</p>
+        <h2 class="sec" data-i18n="wikiTitle">back2church Wiki</h2>
+        <p class="lead" data-i18n="wikiLead">Durchsuche Lehren, Predigten und empfohlene Ressourcen. Wähle einen Treffer, um den Eintrag zu lesen.</p>
+        <div class="search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="q" type="search" autocomplete="off" spellcheck="false" data-i18n-ph="searchPh" placeholder="Suchen, z. B. Glaube, Gemeinde, Schöpfung …" aria-label="Wiki durchsuchen">
+        </div>
+        <div class="chips" id="chips"></div>
+        <div class="meta" id="meta" aria-live="polite"></div>
+        <ul class="results" id="results"></ul>
+      </div>
+      <article class="entry" id="entry" hidden></article>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr"></span> back2church.org</span>
+    <span><a href="https://gospel.back2church.org">Good News &amp; Truth</a> · <a href="#wiki">Wiki</a></span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  /* ---------- i18n ---------- */
+  const T = {
+    de: {
+      navApp:'App', navWiki:'Wiki', eyebrow:'Kirche bauen, wie JESUS es will',
+      heroTitle:'Gehst du immer noch in die Kirche – oder bist du bereit, <em>die Kirche zu werden?</em>',
+      ctaApp:'App öffnen', ctaWiki:'Wiki durchsuchen', ctaSource:'Quellcode auf GitHub',
+      appLead:'Entdecke die Gute Nachricht, durchdachte Antworten auf Glaubensfragen und Ressourcen in mehreren Sprachen – kostenlos, direkt im Browser.',
+      appF1:'Das Evangelium klar und biblisch erklärt', appF2:'Antworten auf häufige Glaubensfragen', appF3:'Mehrsprachig – ideal zum Weitergeben',
+      wikiTitle:'back2church Wiki', wikiLead:'Durchsuche Lehren, Predigten und empfohlene Ressourcen. Wähle einen Treffer, um den Eintrag zu lesen.',
+      searchPh:'Suchen, z. B. Glaube, Gemeinde, Schöpfung …', all:'Alle', showAll:'Alle Einträge anzeigen',
+      hint:n=>`${n} Einträge – gib einen Suchbegriff ein.`, found:n=>n===1?'1 Treffer':`${n} Treffer`,
+      none:'Keine Treffer. Versuche einen anderen Begriff.', back:'← Zurück zur Suche', open:'Website öffnen ↗',
+      noBody:'Für diesen Eintrag gibt es noch keinen Text – nutze den Link oben.', loadErr:'Das Wiki konnte nicht geladen werden.',
+      types:{'Teaching':'Lehre','Sermon':'Predigt','Ressources':'Ressource'}
+    },
+    en: {
+      navApp:'App', navWiki:'Wiki', eyebrow:"Building Church CHRIST's way",
+      heroTitle:'Are you still going to church – or are you ready to <em>become the Church?</em>',
+      ctaApp:'Open the app', ctaWiki:'Search the wiki', ctaSource:'Source on GitHub',
+      appLead:'Explore the Good News, thoughtful answers to questions of faith, and resources in multiple languages – free, right in your browser.',
+      appF1:'The Gospel explained clearly and biblically', appF2:'Answers to common questions of faith', appF3:'Multilingual – made for sharing',
+      wikiTitle:'back2church Wiki', wikiLead:'Search teachings, sermons and recommended resources. Pick a match to read that entry.',
+      searchPh:'Search, e.g. faith, church, creation …', all:'All', showAll:'Show all entries',
+      hint:n=>`${n} entries – type to search.`, found:n=>n===1?'1 match':`${n} matches`,
+      none:'No matches. Try another term.', back:'← Back to search', open:'Open website ↗',
+      noBody:'No text for this entry yet – use the link above.', loadErr:'The wiki could not be loaded.',
+      types:{'Teaching':'Teaching','Sermon':'Sermon','Ressources':'Resource'}
+    }
+  };
+  let lang = 'de';
+  try { lang = localStorage.getItem('b2c-lang') || (navigator.language||'de').slice(0,2); } catch(e){}
+  if (!T[lang]) lang = 'en';
+  const t = k => T[lang][k];
+
+  function applyLang(){
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(el => el.textContent = t(el.dataset.i18n));
+    document.querySelectorAll('[data-i18n-html]').forEach(el => el.innerHTML = t(el.dataset.i18nHtml));
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => el.placeholder = t(el.dataset.i18nPh));
+    document.getElementById('langBtn').textContent = lang === 'de' ? 'EN' : 'DE';
+    renderChips(); route();
+  }
+  document.getElementById('langBtn').onclick = () => {
+    lang = lang === 'de' ? 'en' : 'de';
+    try { localStorage.setItem('b2c-lang', lang); } catch(e){}
+    applyLang();
+  };
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  /* ---------- wiki data ---------- */
+  const $q = document.getElementById('q'), $res = document.getElementById('results'),
+        $meta = document.getElementById('meta'), $chips = document.getElementById('chips'),
+        $search = document.getElementById('wikiSearch'), $entry = document.getElementById('entry');
+  let data = [], typeFilter = null, showAll = false;
+  const fold = s => (s||'').toString().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/ß/g,'ss');
+  const esc = s => (s||'').toString().replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+  fetch('data/wiki.json', {cache:'no-cache'}).then(r => r.json()).then(j => {
+    data = j.entries.map(e => {
+      const tags = [].concat(e.props.Tags||[], e.props['Lesson type']||[], e.props['Media type']||[], e.props.Series||[]);
+      return {...e, tags, _t: fold(e.title), _k: fold(tags.join(' ')), _x: fold(e.text)};
+    });
+    renderChips(); route();
+  }).catch(() => { $meta.textContent = t('loadErr'); });
+
+  function renderChips(){
+    const types = [...new Set(data.map(e => e.props['Entry type']).filter(Boolean))];
+    if (types.length < 2) { $chips.innerHTML = ''; return; }
+    $chips.innerHTML = [null, ...types].map(ty =>
+      `<button class="chip" type="button" data-ty="${ty||''}" aria-pressed="${typeFilter===ty}">${ty ? esc(t('types')[ty]||ty) : t('all')}</button>`).join('');
+    $chips.querySelectorAll('.chip').forEach(b => b.onclick = () => { typeFilter = b.dataset.ty || null; renderChips(); search(); });
+  }
+
+  function score(e, terms){
+    let s = 0;
+    for (const w of terms){
+      let hit = 0;
+      if (e._t.includes(w)) hit += e._t.startsWith(w) ? 12 : 8;
+      if (e._k.includes(w)) hit += 5;
+      if (e._x.includes(w)) hit += 1 + Math.min(4, e._x.split(w).length - 2);
+      if (!hit) return 0;          // every term must match somewhere
+      s += hit;
+    }
+    return s;
+  }
+
+  function snippet(e, terms){
+    const src = e.text || e.tags.join(' · ');
+    if (!src) return '';
+    const f = fold(src); let i = -1;
+    for (const w of terms){ i = f.indexOf(w); if (i >= 0) break; }
+    let start = Math.max(0, i - 60), out = src.slice(start, start + 180);
+    out = (start ? '… ' : '') + esc(out) + (start + 180 < src.length ? ' …' : '');
+    for (const w of terms){ if (w.length < 2) continue;
+      out = out.replace(new RegExp('('+w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'), '<mark>$1</mark>'); }
+    return out;
+  }
+
+  function search(){
+    const raw = $q.value.trim(), terms = fold(raw).split(/\s+/).filter(Boolean);
+    let list = data.filter(e => !typeFilter || e.props['Entry type'] === typeFilter);
+    if (!terms.length && !showAll && !typeFilter){
+      $res.innerHTML = '';
+      $meta.innerHTML = esc(t('hint')(data.length)) + (data.length ? ` <a href="#" id="allLink">${t('showAll')}</a>` : '');
+      const a = document.getElementById('allLink'); if (a) a.onclick = ev => { ev.preventDefault(); showAll = true; search(); };
+      return;
+    }
+    if (terms.length) list = list.map(e => [e, score(e, terms)]).filter(x => x[1]).sort((a,b) => b[1]-a[1]).map(x => x[0]);
+    $meta.textContent = list.length ? t('found')(list.length) : '';
+    $res.innerHTML = list.length ? list.slice(0, 50).map(e => `
+      <li><button type="button" data-id="${e.id}">
+        <div class="r-title">${e.icon ? esc(e.icon)+' ' : ''}${esc(e.title)}</div>
+        ${terms.length && snippet(e, terms) ? `<div class="r-sub">${snippet(e, terms)}</div>` : ''}
+        <div>${e.props['Entry type'] ? `<span class="pill type">${esc(t('types')[e.props['Entry type']]||e.props['Entry type'])}</span>` : ''}${e.tags.slice(0,4).map(x => `<span class="pill">${esc(x)}</span>`).join('')}</div>
+      </button></li>`).join('') : `<li class="empty">${t('none')}</li>`;
+    $res.querySelectorAll('button[data-id]').forEach(b => b.onclick = () => { location.hash = 'wiki/' + b.dataset.id; });
+  }
+  let timer; $q.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(search, 120); });
+
+  function showEntry(id){
+    const e = data.find(x => x.id === id);
+    if (!e) { location.hash = 'wiki'; return; }
+    const p = e.props, chips = [p['Entry type'] && `<span class="pill type">${esc(t('types')[p['Entry type']]||p['Entry type'])}</span>`,
+      p.Language && `<span class="pill">${esc(p.Language)}</span>`, p.Series && `<span class="pill">${esc(p.Series)}</span>`,
+      ...e.tags.filter(x => x !== p.Series).map(x => `<span class="pill">${esc(x)}</span>`)].filter(Boolean).join('');
+    $entry.innerHTML = `
+      <button class="back" type="button">${t('back')}</button>
+      <h2>${e.icon ? esc(e.icon)+' ' : ''}${esc(e.title)}</h2>
+      <div>${chips}</div>
+      ${p.URL ? `<p style="margin-top:18px"><a class="btn ghost" href="${esc(p.URL)}" target="_blank" rel="noopener">${t('open')}</a></p>` : ''}
+      <div class="body">${e.html || `<p class="empty">${t('noBody')}</p>`}</div>`;
+    $entry.querySelector('.back').onclick = () => { location.hash = 'wiki'; };
+    $search.hidden = true; $entry.hidden = false;
+    document.getElementById('wiki').scrollIntoView();
+  }
+
+  function route(){
+    const m = location.hash.match(/^#wiki\/([0-9a-f]{32})$/);
+    if (m && data.length) showEntry(m[1]);
+    else { $entry.hidden = true; $search.hidden = false; if (data.length) search(); }
+  }
+  window.addEventListener('hashchange', route);
+  applyLang();
+})();
+</script>
+</body>
+</html>
