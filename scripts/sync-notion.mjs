@@ -30,14 +30,12 @@ function eq(schema, name, value) {
   return { property: name, [type]: { equals: value } };
 }
 
-// Only finished, published wiki entries (Notion allows max. two filter nesting levels).
-const publicFilter = schema => ({
-  and: [
-    { or: ['Ressources', 'Teaching', 'Sermon'].map(t => eq(schema, 'Entry type', t)) },
-    eq(schema, 'Document status', '1 Published'),
-    eq(schema, 'Completed', 'Done'),
-  ],
-});
+// Notion only pre-filters by Entry type. Document status / Completed are checked here in the script,
+// because Notion's own filter misses renamed select options (e.g. "1 Published" was not matched).
+const publicFilter = schema => ({ or: ['Ressources', 'Teaching', 'Sermon'].map(t => eq(schema, 'Entry type', t)) });
+const optionName = p => (p?.select || p?.status)?.name?.trim() || null;
+const isPublished = pg => optionName(pg.properties['Document status']) === '1 Published'
+  && optionName(pg.properties['Completed']) === 'Done';
 
 // Properties that may be published. Everything else (Email, Mobile, Address, Birthdate, …) is dropped.
 const SAFE_PROPS = ['Entry type', 'Language', 'Series', 'Lesson type', 'Media type', 'Ministry', 'Level', 'Tags', 'URL'];
@@ -181,6 +179,8 @@ async function main() {
   await mkdir(path.join(OUT_DIR, 'data'), { recursive: true });
 
   const db = await notion('GET', `/databases/${DATABASE_ID}`);
+  for (const k of ['Document status', 'Completed'])
+    if (!db.properties[k]) throw new Error(`Property "${k}" not found in the Notion database.`);
   const filter = publicFilter(db.properties);
 
   const pages = [];
@@ -195,7 +195,7 @@ async function main() {
 
   const entries = [];
   for (const pg of pages) {
-    if (pg.archived || pg.in_trash) continue;
+    if (pg.archived || pg.in_trash || !isPublished(pg)) continue;
     const titleProp = Object.values(pg.properties).find(p => p.type === 'title');
     const title = plain(titleProp?.title).trim();
     if (!title || /template/i.test(title)) continue;
