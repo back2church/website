@@ -132,6 +132,15 @@ dt{color:var(--muted)} dd{margin:0;text-align:right;overflow-wrap:anywhere}
 .body figcaption{color:var(--muted);font-size:14px}
 .body hr{border:0;border-top:1px solid var(--line);margin:2em 0}
 
+/* contact */
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:24px;margin-top:8px}
+.ccard{display:flex;flex-direction:column;gap:12px;padding:32px;background:var(--card);border:1px solid var(--line);border-radius:16px;color:var(--text);text-decoration:none;transition:border-color .15s,background-color .15s}
+.ccard:hover,.ccard:focus-visible{border-color:var(--accent);background:var(--card-hover);color:var(--text)}
+.ccard svg{color:var(--accent)}
+.ccard .cn{font:700 26px/1.2 var(--head);margin-top:8px}
+.ccard .cv{color:var(--soft);overflow-wrap:anywhere}
+.ccard .cl{color:var(--accent);font-weight:600;font-size:15px}
+
 /* footer */
 footer.site{padding:36px 0 48px}
 footer.site .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px 32px;font-size:14px}
@@ -157,6 +166,7 @@ footer.site nav a:hover{color:var(--text)}
       <a class="navlink" href="#top" id="navHome" data-i18n="navHome">Start</a>
       <a class="navlink" href="#wiki" id="navWiki">Wiki</a>
       <a class="navlink app-link" href="https://gospel.back2church.org/?lang=de" target="_blank" rel="noopener">App ↗</a>
+      <a class="navlink" href="#kontakt" id="navContact" data-i18n="navContact">Kontakt</a>
       <button class="lang" id="langBtn" type="button">EN</button>
     </nav>
   </div>
@@ -222,6 +232,28 @@ footer.site nav a:hover{color:var(--text)}
       <div id="entry" hidden></div>
     </div>
   </section>
+
+  <section class="block" id="kontakt">
+    <div class="wrap">
+      <p class="label" data-i18n="navContact">Kontakt</p>
+      <h2 class="sec" data-i18n="contactTitle">Schreib uns</h2>
+      <p class="lead" data-i18n="contactLead">Fragen zum Glauben, zur App oder zum Wiki? Wir freuen uns auf deine Nachricht.</p>
+      <div class="contact-grid">
+        <a class="ccard" href="mailto:info@back2church.org">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          <span class="cn" data-i18n="cMail">E-Mail</span>
+          <span class="cv">info@back2church.org</span>
+          <span class="cl" data-i18n="cMailCta">E-Mail schreiben →</span>
+        </a>
+        <a class="ccard" href="https://wa.me/back2church" target="_blank" rel="noopener">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5 5 16.3A8.5 8.5 0 1 1 8 19.1z"/><path d="M9 9.2c0 3 2.6 5.8 5.8 5.8l1-1.6-2-1-1 .9c-1-.5-1.7-1.2-2.2-2.2l.9-1-1-2z"/></svg>
+          <span class="cn">WhatsApp</span>
+          <span class="cv">@back2church</span>
+          <span class="cl" data-i18n="cWaCta">Chat starten ↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer class="site">
@@ -231,6 +263,7 @@ footer.site nav a:hover{color:var(--text)}
       <a href="#top" data-i18n="navHome">Start</a>
       <a href="#wiki">Wiki</a>
       <a class="app-link" href="https://gospel.back2church.org/?lang=de" target="_blank" rel="noopener">Good News &amp; Truth ↗</a>
+      <a href="#kontakt" data-i18n="navContact">Kontakt</a>
     </nav>
   </div>
 </footer>
@@ -240,7 +273,10 @@ footer.site nav a:hover{color:var(--text)}
   /* ---------- i18n ---------- */
   const T = {
     de: {
-      navHome:'Start', eyebrow:'Kirche bauen, wie JESUS es will',
+      navHome:'Start', navContact:'Kontakt', contactTitle:'Schreib uns',
+      contactLead:'Fragen zum Glauben, zur App oder zum Wiki? Wir freuen uns auf deine Nachricht.',
+      cMail:'E-Mail', cMailCta:'E-Mail schreiben →', cWaCta:'Chat starten ↗',
+      eyebrow:'Kirche bauen, wie JESUS es will',
       heroTitle:'Gehst du immer noch in die Kirche – oder bist du bereit, die Kirche zu werden?',
       ctaWiki:'Wiki durchsuchen', ctaApp:'App öffnen ↗', appAria:'Good News & Truth – App öffnen', appAlt:'Screenshot der App Good News & Truth',
       appLead:'Unsere kostenlose App: das Evangelium klar erklärt, Antworten auf Glaubensfragen, mehrsprachig – direkt im Browser.',
@@ -257,7 +293,10 @@ footer.site nav a:hover{color:var(--text)}
       types:{'Teaching':'Lehre','Sermon':'Predigt','Ressources':'Ressource'}, switchTo:'Switch to English'
     },
     en: {
-      navHome:'Home', eyebrow:"Building Church CHRIST's way",
+      navHome:'Home', navContact:'Contact', contactTitle:'Get in touch',
+      contactLead:'Questions about the faith, the app or the wiki? We look forward to hearing from you.',
+      cMail:'Email', cMailCta:'Send an email →', cWaCta:'Start a chat ↗',
+      eyebrow:"Building Church CHRIST's way",
       heroTitle:'Are you still going to church – or are you ready to become the Church?',
       ctaWiki:'Search the wiki', ctaApp:'Open the app ↗', appAria:'Good News & Truth – open the app', appAlt:'Screenshot of the Good News & Truth app',
       appLead:'Our free app: the Gospel explained clearly, answers to questions of faith, in multiple languages – right in your browser.',
@@ -414,10 +453,12 @@ footer.site nav a:hover{color:var(--text)}
 
   function route(){
     const m = location.hash.match(/^#wiki\/([0-9a-f]{32})$/);
-    const inWiki = /^#wiki/.test(location.hash);
-    const nh = document.getElementById('navHome'), nw = document.getElementById('navWiki');
-    if (inWiki) { nw.setAttribute('aria-current','page'); nh.removeAttribute('aria-current'); }
-    else { nh.setAttribute('aria-current','page'); nw.removeAttribute('aria-current'); }
+    const inWiki = /^#wiki/.test(location.hash), inContact = location.hash === '#kontakt';
+    const cur = inWiki ? 'navWiki' : inContact ? 'navContact' : 'navHome';
+    ['navHome','navWiki','navContact'].forEach(id => {
+      const el = document.getElementById(id);
+      if (id === cur) el.setAttribute('aria-current','page'); else el.removeAttribute('aria-current');
+    });
     if (m && data.length) showEntry(m[1]);
     else { $entry.hidden = true; $search.hidden = false; if (data.length) search(); }
   }

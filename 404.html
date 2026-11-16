@@ -1,1 +1,117 @@
-<!doctype html><meta charset="utf-8"><title>back2church</title><meta http-equiv="refresh" content="0; url=/"><a href="/">back2church.org</a>
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seite nicht gefunden – back2church</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="/assets/logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--accent:#f26b1d;--line:#2a2a2a;--line-2:#3a3a3a;--muted:#9a9a9a;--muted-2:#b3b3b3;--soft:#c4c4c4;
+  --head:Montserrat,"Helvetica Neue",Arial,sans-serif;--body:Inter,"Helvetica Neue",Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;background:#000;color:#fff;font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:var(--accent)} a:hover{color:#ff8a45}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+header{border-bottom:1px solid var(--line);background:rgba(0,0,0,.9)}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 24px;padding:10px 24px}
+.brand{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none}
+.brand:hover{color:#fff}
+.brand img{width:44px;height:44px;border-radius:50%;display:block}
+.brand span{font:800 18px var(--head);letter-spacing:.04em;text-transform:uppercase}
+nav.main{margin-left:auto;display:flex;flex-wrap:wrap;align-items:center;gap:4px}
+.navlink{color:var(--muted-2);text-decoration:none;font-weight:500;font-size:15px;padding:12px 12px 10px}
+.navlink:hover{color:#fff}
+.lang{margin-left:8px;color:#fff;background:none;font:600 13px var(--body);letter-spacing:.08em;border:1px solid var(--line-2);border-radius:999px;padding:10px 16px;min-height:44px;cursor:pointer}
+.lang:hover{border-color:var(--accent);color:var(--accent)}
+main{flex:1;max-width:720px;margin:0 auto;padding:120px 24px 140px;text-align:center;display:flex;flex-direction:column;align-items:center}
+.code{margin:0;font:800 clamp(96px,16vw,168px)/1 var(--head);color:var(--accent)}
+h1{margin:24px 0 12px;font:700 clamp(26px,3.4vw,36px)/1.2 var(--head)}
+.lead{margin:0 0 36px;color:var(--soft);max-width:48ch}
+.cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.btn{display:inline-flex;align-items:center;min-height:48px;padding:0 24px;border-radius:999px;background:var(--accent);color:#000;font-weight:700;font-size:15px;text-decoration:none}
+.btn:hover{filter:brightness(1.08);color:#000}
+.ghost{display:inline-flex;align-items:center;min-height:48px;padding:0 24px;border-radius:999px;border:1px solid #fff;color:#fff;font-weight:600;font-size:15px;text-decoration:none}
+.ghost:hover{border-color:var(--accent);color:var(--accent)}
+footer{border-top:1px solid var(--line)}
+footer .wrap{padding-top:36px;padding-bottom:48px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px 32px;font-size:14px}
+.who{display:flex;align-items:center;gap:12px;color:var(--muted)}
+.who img{width:32px;height:32px;border-radius:50%;display:block}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 24px}
+footer nav a{color:var(--muted-2);text-decoration:none}
+footer nav a:hover{color:#fff}
+@media (max-width:760px){main{padding:80px 24px 96px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="/"><img src="/assets/logo.png" alt="" width="44" height="44"><span>back2church</span></a>
+    <nav class="main" aria-label="Main">
+      <a class="navlink" href="/" data-t="home">Start</a>
+      <a class="navlink" href="/#wiki">Wiki</a>
+      <a class="navlink app" href="https://gospel.back2church.org/?lang=de" target="_blank" rel="noopener">App ↗</a>
+      <a class="navlink" href="/#kontakt" data-t="contact">Kontakt</a>
+      <button class="lang" id="langBtn" type="button">EN</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <p class="code">404</p>
+  <h1 data-t="title">Diese Seite gibt es nicht</h1>
+  <p class="lead" data-t="lead">Vielleicht wurde sie verschoben oder der Link ist veraltet. Starte auf der Startseite oder durchsuche das Wiki.</p>
+  <div class="cta">
+    <a class="btn" href="/" data-t="toHome">Zur Startseite</a>
+    <a class="ghost" href="/#wiki" data-t="toWiki">Wiki durchsuchen</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="who"><img src="/assets/logo.png" alt="" width="32" height="32"><span>© <span id="yr"></span> back2church.org</span></div>
+    <nav aria-label="Footer">
+      <a href="/" data-t="home">Start</a>
+      <a href="/#wiki">Wiki</a>
+      <a class="app" href="https://gospel.back2church.org/?lang=de" target="_blank" rel="noopener">Good News &amp; Truth ↗</a>
+      <a href="/#kontakt" data-t="contact">Kontakt</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const T = {
+    de: { doc:'Seite nicht gefunden – back2church', home:'Start', contact:'Kontakt', title:'Diese Seite gibt es nicht',
+          lead:'Vielleicht wurde sie verschoben oder der Link ist veraltet. Starte auf der Startseite oder durchsuche das Wiki.',
+          toHome:'Zur Startseite', toWiki:'Wiki durchsuchen', switchTo:'Switch to English' },
+    en: { doc:'Page not found – back2church', home:'Home', contact:'Contact', title:'This page doesn’t exist',
+          lead:'It may have moved or the link is out of date. Start on the home page or search the wiki.',
+          toHome:'Go to the home page', toWiki:'Search the wiki', switchTo:'Auf Deutsch wechseln' }
+  };
+  let lang = 'de';
+  try { lang = localStorage.getItem('b2c-lang') || (navigator.language || 'de').slice(0, 2); } catch (e) {}
+  if (!T[lang]) lang = 'en';
+  function apply() {
+    document.documentElement.lang = lang;
+    document.title = T[lang].doc;
+    document.querySelectorAll('[data-t]').forEach(el => el.textContent = T[lang][el.dataset.t]);
+    document.querySelectorAll('a.app').forEach(a => a.href = 'https://gospel.back2church.org/?lang=' + lang);
+    const b = document.getElementById('langBtn');
+    b.textContent = lang === 'de' ? 'EN' : 'DE'; b.setAttribute('aria-label', T[lang].switchTo);
+  }
+  document.getElementById('langBtn').onclick = () => {
+    lang = lang === 'de' ? 'en' : 'de';
+    try { localStorage.setItem('b2c-lang', lang); } catch (e) {}
+    apply();
+  };
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  apply();
+})();
+</script>
+</body>
+</html>

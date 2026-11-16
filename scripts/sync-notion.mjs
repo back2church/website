@@ -1,7 +1,7 @@
 // Pulls the PUBLIC entries of the "B2C master database" from Notion
 // and writes them to data/wiki.json (+ downloads Notion-hosted images to media/).
 //
-// Public = Entry type "Ressources"  OR  (Entry type "Teaching"/"Sermon" AND Document status "1 Final").
+// Public = Entry type "Ressources"/"Teaching"/"Sermon"  AND  Document status "1 Published"  AND  Completed "Done".
 // Contacts, Tasks, Meetings, Events and drafts are NEVER exported.
 //
 // Needs env NOTION_TOKEN (internal integration secret, shared with the database).
@@ -30,12 +30,12 @@ function eq(schema, name, value) {
   return { property: name, [type]: { equals: value } };
 }
 
-// Notion allows only two levels of nested filters, so Teaching/Sermon get one AND each.
+// Only finished, published wiki entries (Notion allows max. two filter nesting levels).
 const publicFilter = schema => ({
-  or: [
-    eq(schema, 'Entry type', 'Ressources'),
-    { and: [eq(schema, 'Entry type', 'Teaching'), eq(schema, 'Document status', '1 Final')] },
-    { and: [eq(schema, 'Entry type', 'Sermon'), eq(schema, 'Document status', '1 Final')] },
+  and: [
+    { or: ['Ressources', 'Teaching', 'Sermon'].map(t => eq(schema, 'Entry type', t)) },
+    eq(schema, 'Document status', '1 Published'),
+    eq(schema, 'Completed', 'Done'),
   ],
 });
 
