@@ -71,6 +71,19 @@ section.block>.wrap{padding-top:96px;padding-bottom:96px}
 h2.sec{margin:0 0 16px;font:700 clamp(28px,3.6vw,40px)/1.15 var(--head)}
 .lead{margin:0 0 32px;color:var(--soft);max-width:60ch}
 
+/* gospel */
+.gospel{padding-bottom:0!important}
+.gospel-verse{margin:32px auto 56px;max-width:760px;text-align:center}
+.gospel-verse p{margin:0;font-style:italic;font-size:clamp(19px,2.2vw,24px);line-height:1.6}
+.gospel-verse sup{color:var(--accent);font-style:normal;font-weight:700;font-size:.55em;margin:0 3px 0 6px;vertical-align:super}
+.gospel-verse sup:first-child{margin-left:0}
+.gospel-verse footer{margin-top:20px;color:var(--accent);font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+.pillars{list-style:none;margin:0;padding:40px 0 0;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:32px;counter-reset:p}
+.pillars li:before{content:counter(p,decimal-leading-zero);counter-increment:p;display:block;color:var(--accent);font:800 14px var(--head);letter-spacing:.06em;margin-bottom:12px}
+.pillars h3{margin:0 0 10px;font:700 21px/1.25 var(--head)}
+.pillars p{margin:0;color:var(--soft);font-size:15px}
+.app-intro{padding-top:80px!important}
+
 /* app */
 .app{display:flex;flex-wrap:wrap;align-items:center;gap:48px}
 .app>div:first-child{flex:2 1 420px;min-width:0}
@@ -80,6 +93,20 @@ h2.sec{margin:0 0 16px;font:700 clamp(28px,3.6vw,40px)/1.15 var(--head)}
 .phone{flex:1 1 260px;display:block;max-width:285px;margin:0 auto;border:1px solid var(--line);border-radius:32px;overflow:hidden;background:var(--card);box-shadow:0 30px 80px -30px rgba(242,107,29,.45);transition:transform .2s,box-shadow .2s,border-color .2s}
 .phone:hover,.phone:focus-visible{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 36px 90px -26px rgba(242,107,29,.6)}
 .phone img{display:block;width:100%;height:auto}
+
+/* wiki: foundations series */
+.series{margin:0 0 56px;padding:28px 28px 20px;background:var(--card);border:1px solid var(--line);border-radius:16px}
+.series-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.series-head h3{margin:0;font:700 22px/1.25 var(--head)}
+.series-count{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.series-sub{margin:6px 0 16px;color:var(--muted);font-size:15px}
+.series-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));column-gap:32px}
+.series-list li{border-top:1px solid var(--line)}
+.series-list a{display:flex;align-items:baseline;gap:14px;padding:11px 4px;color:var(--text);text-decoration:none;font-size:15px;line-height:1.4}
+.series-list a:hover,.series-list a:focus-visible{color:var(--accent)}
+.series-list .n{flex:0 0 26px;color:var(--accent);font:800 14px var(--head);letter-spacing:.04em}
+.series-list .ov{color:var(--muted);font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.series-empty{grid-column:1/-1;padding:12px 4px;color:var(--muted);font-size:15px;border-top:1px solid var(--line)}
 
 /* wiki: search */
 .search-wrap{max-width:760px}
@@ -193,8 +220,46 @@ footer.site nav a:hover{color:var(--text)}
     </div>
   </section>
 
+  <section class="block" id="wiki">
+    <div class="wrap">
+      <div id="wikiSearch">
+        <p class="label">Wiki</p>
+        <h2 class="sec">back2church Wiki</h2>
+        <p class="lead" data-i18n="wikiLead">Durchsuche Lehren, Predigten und empfohlene Ressourcen. Wähle einen Treffer, um den Eintrag zu lesen.</p>
+        <div class="series">
+          <div class="series-head">
+            <h3 data-i18n="seriesTitle">Fundament des Glaubens</h3>
+            <span class="series-count" id="seriesCount"></span>
+          </div>
+          <p class="series-sub" data-i18n="seriesSub">Die Grundlagen des christlichen Glaubens – Schritt für Schritt.</p>
+          <ol class="series-list" id="seriesList"></ol>
+        </div>
+        <div class="search-wrap">
+          <label class="field-label" for="q" data-i18n="searchLabel">Suchbegriff</label>
+          <div class="search">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="q" type="search" autocomplete="off" spellcheck="false" data-i18n-ph="searchPh" placeholder="z. B. Glaube, Gemeinde, Schöpfung …">
+          </div>
+          <div class="chips" id="chips"></div>
+          <p class="meta" id="meta" aria-live="polite"></p>
+          <ul class="results" id="results"></ul>
+        </div>
+      </div>
+      <div id="entry" hidden></div>
+    </div>
+  </section>
+
   <section class="block" id="app">
-    <div class="wrap app">
+    <div class="wrap gospel">
+      <p class="label" data-i18n="gospelLabel">Die gute Nachricht</p>
+      <h2 class="sec" data-i18n="gospelTitle">Das Herz der guten Nachricht</h2>
+      <blockquote class="gospel-verse">
+        <p id="gospelVerse"></p>
+        <footer id="gospelRef"></footer>
+      </blockquote>
+      <ol class="pillars" id="pillars"></ol>
+    </div>
+    <div class="wrap app app-intro">
       <div>
         <p class="label">App</p>
         <h2 class="sec">Good News &amp; Truth</h2>
@@ -209,27 +274,6 @@ footer.site nav a:hover{color:var(--text)}
       <a class="phone app-link" href="https://gospel.back2church.org/?lang=de" target="_blank" rel="noopener" id="phoneLink" aria-label="Good News &amp; Truth – App öffnen">
         <img src="assets/app-screenshot.webp" width="450" height="821" loading="lazy" alt="Screenshot der App Good News &amp; Truth">
       </a>
-    </div>
-  </section>
-
-  <section class="block" id="wiki">
-    <div class="wrap">
-      <div id="wikiSearch">
-        <p class="label">Wiki</p>
-        <h2 class="sec">back2church Wiki</h2>
-        <p class="lead" data-i18n="wikiLead">Durchsuche Lehren, Predigten und empfohlene Ressourcen. Wähle einen Treffer, um den Eintrag zu lesen.</p>
-        <div class="search-wrap">
-          <label class="field-label" for="q" data-i18n="searchLabel">Suchbegriff</label>
-          <div class="search">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-            <input id="q" type="search" autocomplete="off" spellcheck="false" data-i18n-ph="searchPh" placeholder="z. B. Glaube, Gemeinde, Schöpfung …">
-          </div>
-          <div class="chips" id="chips"></div>
-          <p class="meta" id="meta" aria-live="polite"></p>
-          <ul class="results" id="results"></ul>
-        </div>
-      </div>
-      <div id="entry" hidden></div>
     </div>
   </section>
 
@@ -273,6 +317,15 @@ footer.site nav a:hover{color:var(--text)}
   /* ---------- i18n ---------- */
   const T = {
     de: {
+      gospelLabel:'Die gute Nachricht', gospelTitle:'Das Herz der guten Nachricht',
+      gospelRef:'1. Korinther 15,3–5 · Elberfelder',
+      gospelVerse:'<sup>3</sup>Denn ich habe euch vor allem überliefert, was ich auch empfangen habe: dass CHRISTUS für unsere Sünden gestorben ist nach den Schriften; <sup>4</sup>und dass Er begraben wurde und dass Er auferweckt worden ist am dritten Tag nach den Schriften; <sup>5</sup>und dass Er Kephas erschienen ist, dann den Zwölfen.',
+      pillars:[['CHRISTUS starb für unsere Sünden','JESUS nahm die gerechte Strafe für unsere Schuld auf sich, damit wir Vergebung und Frieden mit GOTT haben können.'],
+               ['Er wurde begraben','Sein Tod war ein historisches Ereignis, bezeugt von römischen Wachen und Augenzeugen.'],
+               ['Er ist am dritten Tag auferstanden','Der Sieg über den Tod bestätigt, dass JESUS der Sohn GOTTES ist und uns ewiges Leben schenkt.'],
+               ['Er erschien den Zeugen','Er wurde von Petrus und den zwölf Aposteln gesehen – die Auferstehung ist durch historische Augenzeugen verbürgt.']],
+      seriesTitle:'Fundament des Glaubens', seriesSub:'Die Grundlagen des christlichen Glaubens – Schritt für Schritt.',
+      seriesCount:n=>`${n} ${n===1?'Lektion':'Lektionen'}`, seriesEmpty:'Die ersten Lektionen erscheinen hier in Kürze.', overview:'Übersicht',
       navHome:'Start', navContact:'Kontakt', contactTitle:'Schreib uns',
       contactLead:'Fragen zum Glauben, zur App oder zum Wiki? Wir freuen uns auf deine Nachricht.',
       cMail:'E-Mail', cMailCta:'E-Mail schreiben →', cWaCta:'Chat starten ↗',
@@ -293,6 +346,15 @@ footer.site nav a:hover{color:var(--text)}
       types:{'Teaching':'Lehre','Sermon':'Predigt','Ressources':'Ressource'}, switchTo:'Switch to English'
     },
     en: {
+      gospelLabel:'The Good News', gospelTitle:'The heart of the Good News',
+      gospelRef:'1 Corinthians 15:3–5 · NASB 1995',
+      gospelVerse:'<sup>3</sup>For I delivered to you as of first importance what I also received, that CHRIST died for our sins according to the Scriptures, <sup>4</sup>and that He was buried, and that He was raised on the third day according to the Scriptures, <sup>5</sup>and that He appeared to Cephas, then to the twelve.',
+      pillars:[['CHRIST Died for Our Sins','JESUS paid the full spiritual penalty for our wrongdoing so we could have peace and eternal reconciliation with GOD.'],
+               ['He Was Buried','His physical death was an indisputable historical event confirmed by Roman soldiers and public burial in a known tomb.'],
+               ['He Rose on the Third Day','The physical resurrection broke the power of death and validates JESUS as the Son of GOD.'],
+               ['He Appeared to Eyewitnesses','He appeared to Cephas (Peter) and then to the Twelve, providing overwhelming historical eyewitness confirmation of His victory over death.']],
+      seriesTitle:'Faith Foundations', seriesSub:'The foundations of the Christian faith – step by step.',
+      seriesCount:n=>`${n} ${n===1?'lesson':'lessons'}`, seriesEmpty:'The first lessons will appear here soon.', overview:'Overview',
       navHome:'Home', navContact:'Contact', contactTitle:'Get in touch',
       contactLead:'Questions about the faith, the app or the wiki? We look forward to hearing from you.',
       cMail:'Email', cMailCta:'Send an email →', cWaCta:'Start a chat ↗',
@@ -326,7 +388,10 @@ footer.site nav a:hover{color:var(--text)}
     document.querySelectorAll('.app-link').forEach(a => a.href = 'https://gospel.back2church.org/?lang=' + lang);
     const ph = document.getElementById('phoneLink'); ph.setAttribute('aria-label', t('appAria')); ph.querySelector('img').alt = t('appAlt');
     const lb = document.getElementById('langBtn'); lb.textContent = lang === 'de' ? 'EN' : 'DE'; lb.setAttribute('aria-label', t('switchTo'));
-    renderChips(); route();
+    document.getElementById('gospelVerse').innerHTML = '“' + t('gospelVerse') + '”';
+    document.getElementById('gospelRef').textContent = t('gospelRef');
+    document.getElementById('pillars').innerHTML = t('pillars').map(p => `<li><h3>${p[0]}</h3><p>${p[1]}</p></li>`).join('');
+    renderChips(); renderSeries(); route();
   }
   document.getElementById('langBtn').onclick = () => {
     lang = lang === 'de' ? 'en' : 'de'; typeFilter = null; showAll = false;
@@ -352,13 +417,30 @@ footer.site nav a:hover{color:var(--text)}
   }
   const langData = () => data.filter(e => e._lang === lang);
 
+  // "Faith Foundations series" list: built from the synced wiki data, so it updates with Notion.
+  const SERIES = 'Faith Foundations series';
+  function renderSeries(){
+    const $l = document.getElementById('seriesList'), $c = document.getElementById('seriesCount');
+    if (!data.length) { $l.innerHTML = ''; $c.textContent = ''; return; }
+    const items = langData().filter(e => [].concat(e.props.Series||[]).includes(SERIES)).map(e => {
+      const m = e.title.match(/^\s*(?:Faith Foundations|Fundament des Glaubens)\s*(\d+)\s*[:.\-–]?\s*(.*)$/i);
+      return { e, n: m ? +m[1] : null, label: m ? (m[2] || e.title) : e.title };
+    }).sort((a,b) => (a.n ?? -1) - (b.n ?? -1) || a.label.localeCompare(b.label));
+    const lessons = items.filter(x => x.n !== null).length;
+    $c.textContent = lessons ? t('seriesCount')(lessons) : '';
+    $l.innerHTML = items.length ? items.map(x => `<li><a href="#wiki/${x.e.id}">${x.n !== null
+        ? `<span class="n">${String(x.n).padStart(2,'0')}</span><span>${esc(x.label)}</span>`
+        : `<span class="n">–</span><span><span class="ov">${t('overview')}</span> · ${esc(x.label)}</span>`}</a></li>`).join('')
+      : `<li class="series-empty">${t('seriesEmpty')}</li>`;
+  }
+
   fetch('data/wiki.json', {cache:'no-cache'}).then(r => r.json()).then(j => {
     data = j.entries.map(e => {
       const tags = [].concat(e.props.Tags||[], e.props['Lesson type']||[], e.props.Series||[]);
       const media = [].concat(e.props['Media type']||[]);
       return {...e, tags, media, _lang: entryLang(e.props.Language), _t: fold(e.title), _k: fold(tags.concat(media).join(' ')), _x: fold(e.text)};
     });
-    renderChips(); route();
+    renderChips(); renderSeries(); route();
   }).catch(() => { $meta.textContent = t('loadErr'); });
 
   function renderChips(){
