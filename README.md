@@ -3,13 +3,13 @@
 Static website for **back2church.org**: landing page, Good News & Truth app link (gospel.back2church.org) and a searchable wiki fed from the Notion "B2C master database". Hosted free on GitHub Pages.
 
 ## How the wiki works
-- `scripts/sync-notion.mjs` runs in GitHub Actions on every push and daily (~04:17 CH time).
+- `scripts/sync-notion.mjs` runs in GitHub Actions on every push and hourly (at :17).
 - It exports **only** public entries to `data/wiki.json`:
   - Entry type **Ressources / Teaching / Sermon**, and
   - Document status **1 Published**, and
   - Completed **Done**.
 - Contacts, Tasks, Meetings, Events, drafts and private fields (Email, Mobile, Address, Birthdate) are never exported. Pages titled "…template…" are skipped.
-- To publish a teaching: set its Document status to **1 Published** and Completed to **Done** in Notion. It appears after the next daily run (or run the workflow manually: Actions → "Sync Notion wiki & deploy" → Run workflow).
+- To publish a teaching: set its Document status to **1 Published** and Completed to **Done** in Notion. It appears after the next hourly run (or run the workflow manually: Actions → "Sync Notion wiki & deploy" → Run workflow).
 
 ## One-time setup
 1. **Repo:** push this folder to `back2church/website` (branch `main`).
