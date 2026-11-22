@@ -1,7 +1,7 @@
 // Pulls the PUBLIC entries of the "B2C master database" from Notion
 // and writes them to data/wiki.json (+ downloads Notion-hosted images to media/).
 //
-// Public = Entry type "Ressources"/"Teaching"/"Sermon"  AND  Document status "1 Published"  AND  Completed "Done".
+// Public = Entry type "Resources"/"Teaching"/"Sermon"  AND  Status "Published".
 // Contacts, Tasks, Meetings, Events and drafts are NEVER exported.
 //
 // Needs env NOTION_TOKEN (internal integration secret, shared with the database).
@@ -30,15 +30,14 @@ function eq(schema, name, value) {
   return { property: name, [type]: { equals: value } };
 }
 
-// Notion only pre-filters by Entry type. Document status / Completed are checked here in the script,
-// because Notion's own filter misses renamed select options (e.g. "1 Published" was not matched).
-const publicFilter = schema => ({ or: ['Ressources', 'Teaching', 'Sermon'].map(t => eq(schema, 'Entry type', t)) });
+// Notion only pre-filters by Entry type. Status is checked here in the script,
+// because Notion's own filter misses renamed select options.
+const publicFilter = schema => ({ or: ['Resources', 'Teaching', 'Sermon'].map(t => eq(schema, 'Entry type', t)) });
 const optionName = p => (p?.select || p?.status)?.name?.trim() || null;
-const isPublished = pg => optionName(pg.properties['Document status']) === '1 Published'
-  && optionName(pg.properties['Completed']) === 'Done';
+const isPublished = pg => optionName(pg.properties['Status']) === 'Published';
 
 // Properties that may be published. Everything else (Email, Mobile, Address, Birthdate, …) is dropped.
-const SAFE_PROPS = ['Entry type', 'Language', 'Series', 'Lesson type', 'Media type', 'Ministry', 'Level', 'Tags', 'URL'];
+const SAFE_PROPS = ['Entry type', 'Language', 'Series', 'Lesson type', 'Media type', 'Ministry', 'Depth', 'Tags', 'URL'];
 
 async function notion(method, url, body, attempt = 0) {
   const res = await fetch(API + url, {
@@ -179,7 +178,7 @@ async function main() {
   await mkdir(path.join(OUT_DIR, 'data'), { recursive: true });
 
   const db = await notion('GET', `/databases/${DATABASE_ID}`);
-  for (const k of ['Document status', 'Completed'])
+  for (const k of ['Status'])
     if (!db.properties[k]) throw new Error(`Property "${k}" not found in the Notion database.`);
   const filter = publicFilter(db.properties);
 
